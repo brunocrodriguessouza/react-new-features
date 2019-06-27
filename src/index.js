@@ -20,9 +20,9 @@ const App = (props) => {
     return(
         <div>
             <p>The current count is {count}</p>
-            <button onClick={() => decrement()}>-1</button>
-            <button onClick={() => reset()}>Reset</button>
-            <button onClick={() => increment()}>+1</button>
+            <button onClick={decrement}>-1</button>
+            <button onClick={reset}>Reset</button>
+            <button onClick={increment}>+1</button>
         </div>
     )
 }
