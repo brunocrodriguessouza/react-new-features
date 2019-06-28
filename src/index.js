@@ -5,12 +5,12 @@ import * as serviceWorker from './serviceWorker';
 const NoteApp = () => {
     const [notes, setNotes] = useState([])
     const [title, setTitle] = useState('')
-    const [body, setBody] = useState('');
+    const [body, setBody] = useState('')
 
     const addNote = (e) => {
         e.preventDefault()
         setNotes([
-            ...notes, 
+            ...notes,
             { title, body }
         ])
         setTitle('')
@@ -24,18 +24,18 @@ const NoteApp = () => {
     return (
         <div>
             <h1>Notes</h1>
-
             {notes.map((note) => (
-                <div key={note.title}> 
+                <div key={note.title}>
                     <h3>{note.title}</h3>
-                    <button onClick={() => removeNote(note.title)}>X</button>
+                    <p>{note.body}</p>
+                    <button onClick={() => removeNote(note.title)}>x</button>
                 </div>
             ))}
             <p>Add note</p>
             <form onSubmit={addNote}>
                 <input value={title} onChange={(e) => setTitle(e.target.value)} />
                 <textarea value={body} onChange={(e) => setBody(e.target.value)}></textarea>
-                <button>Add note</button>
+                <button>add note</button>
             </form>
         </div>
     )
