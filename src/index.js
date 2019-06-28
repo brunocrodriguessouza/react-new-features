@@ -8,6 +8,6 @@ App.defaultProps = {
     count: 0
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<NoteApp/>, document.getElementById('root'));
 
 serviceWorker.unregister();
