@@ -8,10 +8,14 @@ export default (props) => {
     const [count, setCount] = useState(props.count)
     const [text, setText] = useState('')
 
+    useEffect(() => {
+        console.log('This should only run once!');
+    }, [])
 
     useEffect(() => {
         console.log('useEffect ran');
-    })
+        document.title = count;
+    }, [count])
 
     const increment = () => {
         // setState({ ...state, count: state.count +1 })

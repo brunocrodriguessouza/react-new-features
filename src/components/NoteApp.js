@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default () => {
-    const notesData = JSON.parse(localStorage.getItem('notes'))
-    const [notes, setNotes] = useState(notesData || [])
+    const [notes, setNotes] = useState([])
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
@@ -21,8 +20,16 @@ export default () => {
     }
 
     useEffect(() => {
-        localStorage.setItem('notes', JSON.stringify(notes));
-    })
+        const notesData = JSON.parse(localStorage.getItem('notes'))
+
+        if (notesData) {
+            setNotes(notesData)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('notes', JSON.stringify(notes))
+    }, [notes])
 
     return (
         <div>
