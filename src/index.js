@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import NoteApp from './components/NoteApp';
-import App from './App';
-
-App.defaultProps = {
-    count: 0
-}
+import NoteApp from './components/NoteApp'
 
 ReactDOM.render(<NoteApp/>, document.getElementById('root'));
 

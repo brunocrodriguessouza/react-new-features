@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import Note from './Note';
+import React, { useEffect, useReducer } from 'react'
+import notesReducer from '../reducers/notes'
+import NoteList from './NoteList'
+import AddNoteForm from './AddNoteForm'
 
-export default () => {
-    const [notes, setNotes] = useState([])
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
-
-    const addNote = (e) => {
-        e.preventDefault()
-        setNotes([
-            ...notes,
-            { title, body }
-        ])
-        setTitle('')
-        setBody('')
-    }
+const NoteApp = () => {
+    const [notes, dispatch] = useReducer(notesReducer, [])
 
     const removeNote = (title) => {
-        setNotes(notes.filter((note) => note.title !== title))
+        dispatch({
+            type: 'REMOVE_NOTE',
+            title
+        })
     }
 
     useEffect(() => {
-        const notesData = JSON.parse(localStorage.getItem('notes'))
+        const notes = JSON.parse(localStorage.getItem('notes'))
 
-        if (notesData) {
-            setNotes(notesData)
+        if (notes) {
+            dispatch({ type: 'POPULATE_NOTES', notes })
         }
     }, [])
 
@@ -35,17 +28,10 @@ export default () => {
     return (
         <div>
             <h1>Notes</h1>
-            { 
-                notes.map((note) => (
-                    <Note key={note.title} note={note} removeNote={removeNote}/> 
-                ))
-            }
-            <p>Add note</p>
-            <form onSubmit={addNote}>
-                <input value={title} onChange={(e) => setTitle(e.target.value)} />
-                <textarea value={body} onChange={(e) => setBody(e.target.value)}></textarea>
-                <button>add note</button>
-            </form>
+            <NoteList notes={notes} removeNote={removeNote}/>
+            <AddNoteForm dispatch={dispatch}/>
         </div>
     )
 }
+
+export { NoteApp as default }

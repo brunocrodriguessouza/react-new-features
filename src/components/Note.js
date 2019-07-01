@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react'
 
-export default ({ note, removeNote }) => {
-    useEffect(() => {
-        console.log('Setting up effect!')
-
-        return () => {
-            console.log('Cleaning up effect!')
-        }
-    }, [])
-
+const Note = ({ note, removeNote }) => {
     return (
         <div>
             <h3>{note.title}</h3>
@@ -17,3 +9,5 @@ export default ({ note, removeNote }) => {
         </div>
     )
 }
+
+export { Note as default }
